@@ -6,8 +6,11 @@ import pl.camp.it.filmoteka.model.Movie;
 import pl.camp.it.filmoteka.model.TvShow;
 import pl.camp.it.filmoteka.dataBase.IFilmRepository;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.sun.jmx.snmp.ThreadContext.contains;
 
 
 @Component
@@ -18,19 +21,55 @@ public class ListFilmRepositoryImpl implements IFilmRepository {
 
     public ListFilmRepositoryImpl() {
 
-        films.add(new Movie("The Thing", "John Carpenter", 1982, 110));
-        films.add(new Movie("American Psycho", "Mary Harron", 2000, 100));
-        films.add(new Movie("Good, Bad and Ugly", "Sergio Leone", 1966, 180));
-        films.add(new Movie("Saw", "James Wan", 2004, 100));
-        films.add(new Movie("Cube", "Vincenzo Natali", 1997, 90));
-        films.add(new TvShow("Breaking Bad", "Vince Gilligan", 2008, 5));
-        films.add(new TvShow("House M.D", "David Shore", 2004, 8));
-        films.add(new TvShow("Friends", "David Crane, Marta Kauffman", 1994, 10));
-        films.add(new TvShow("Queen's Gambit", "Allan Scott, Scott Frank", 2020, 1));
+        films.add(new Movie("The Thing", "John Carpenter", 1982, "110min", Film.Category.MOVIE));
+        films.add(new Movie("American Psycho", "Mary Harron", 2000, "100min", Film.Category.MOVIE));
+        films.add(new Movie("Good, Bad and Ugly", "Sergio Leone", 1966, "100min", Film.Category.MOVIE));
+        films.add(new Movie("Saw", "James Wan", 2004, "100min", Film.Category.MOVIE));
+        films.add(new Movie("Cube", "Vincenzo Natali", 1997, "90min", Film.Category.MOVIE));
+        films.add(new TvShow("Breaking Bad", "Vince Gilligan", 2008, "5 seasons", Film.Category.TVSHOW));
+        films.add(new TvShow("House M.D", "David Shore", 2004, "8 seasons", Film.Category.TVSHOW));
+        films.add(new TvShow("Friends", "David Crane, Marta Kauffman", 1994, "10 seasons", Film.Category.TVSHOW));
+        films.add(new TvShow("Queen's Gambit", "Allan Scott, Scott Frank", 2020, "1 season", Film.Category.TVSHOW));
     }
 
     @Override
     public List<Film> getAllFilms() {
         return this.films;
     }
+
+    @Override
+    public List<Film> getMovies() {
+        List<Film> filmList = new ArrayList<>();
+        for(Film film : this.films) {
+            if(film.getCategory() == Film.Category.MOVIE) {
+                filmList.add(film);
+            }
+        }
+        return filmList;
+    }
+
+    @Override
+    public List<Film> getTvShows() {
+        List<Film> filmList = new ArrayList<>();
+        for(Film film : this.films) {
+            if(film.getCategory() == Film.Category.TVSHOW) {
+                filmList.add(film);
+            }
+        }
+        return filmList;
+    }
+
+    @Override
+    public List<Film> getFilmsByFilter(String filter) {
+        List<Film> filteredFilms = new ArrayList<>();
+
+        for(Film film : this.films) {
+            if (film.getTitle().toUpperCase().contains(filter.toUpperCase()) ||
+                    film.getDirector().toUpperCase().contains(filter.toUpperCase())) {
+                filteredFilms.add(film);
+            }
+        }
+        return filteredFilms;
+    }
+
 }

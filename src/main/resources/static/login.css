@@ -1,0 +1,70 @@
+#napisGlowny {
+    display: inline;
+    font-size: 80px;
+    text-align: center;
+}
+#menu-choice {
+    display: inline;
+
+}
+
+#menu-choice a {
+    font-size: 40px;
+    margin: 50px;
+    text-decoration: none;
+    color: black;
+    transition: color 0,5s;
+}
+
+#menu-choice a:hover {
+    color: red;
+}
+
+#content {
+    margin: 15px 200px;
+}
+
+.film {
+    border: 2px solid gray;
+    padding: 10px;
+    margin: 10px;
+}
+
+#login-form {
+    width: 500px;
+    margin: 20px auto;
+}
+
+#login-form input {
+    display: block;
+}
+
+.text-input {
+    width: 100%;
+    margin: 7px 0;
+    font-size: 20px;
+    text-align: center;
+}
+
+#form-submit {
+    color: black;
+    width: 30%;
+    margin: 7px auto;
+    font-size: 20px;
+    background: white;
+    border: 2px solid red;
+    border-radius: 10px;
+    transition: color 0,5s, border 1s;
+}
+
+#form-submit:hover {
+    cursor: pointer;
+    color: red;
+    border: 2px solid black;
+}
+
+#info {
+    font-size: 26px;
+    color: red;
+    text-align: center;
+}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="menu-choice" th:fragment="menu">
+    <img src="/logo.png" alt="Logo" id="logo">
+    <a href="/movies">Movies</a>
+    <a href="/tv-shows">Tv-Shows</a>
+    <a href="/logout">Logout</a>
+    <a href="/edit" th:text="${user.login}"></a>
+</div>
+</body>
+</html>

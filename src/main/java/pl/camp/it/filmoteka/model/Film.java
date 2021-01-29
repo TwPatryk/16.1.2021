@@ -4,15 +4,21 @@ public class Film {
     private String title;
     private String director;
     private int productionYear;
+    private String length;
+    private Category category;
 
     public Film() {
     }
 
-    public Film(String title, String director, int productionYear) {
+    public Film(String title, String director, int productionYear, String length, Category category) {
         this.title = title;
         this.director = director;
         this.productionYear = productionYear;
+        this.length = length;
+        this.category = category;
     }
+
+
 
     public String getTitle() {
         return title;
@@ -36,5 +42,37 @@ public class Film {
 
     public void setProductionYear(int productionYear) {
         this.productionYear = productionYear;
+    }
+
+    public String getLength() {
+        return length;
+    }
+
+    public void setLength(String length) {
+        this.length = length;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Film{" +
+                "title='" + title + '\'' +
+                ", director='" + director + '\'' +
+                ", productionYear=" + productionYear +
+                ", length='" + length + '\'' +
+                ", category=" + category +
+                '}';
+    }
+
+    public enum Category {
+        MOVIE,
+        TVSHOW;
     }
 }
