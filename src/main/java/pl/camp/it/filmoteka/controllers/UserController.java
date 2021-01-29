@@ -93,4 +93,8 @@ public class UserController {
 
         return "redirect:/edit";
     }
+    @RequestMapping(value= "/register", method = RequestMethod.GET)
+    public String register() {
+        return "register";
+    }
 }

@@ -6,24 +6,28 @@
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="common-controls.css">
+    <link rel="stylesheet" href="register.css">
 </head>
 <body>
 <div id="napisGlowny">
     <p>FILMOTEKA</p>
 </div>
+
 <div id="menu-choice">
     <img src="/logo.png" alt="Logo" id="logo">
     <a href="/movies">Movies</a>
     <a href="/tv-shows">Tv-Shows</a>
     <a href="/logout">Logout</a>
 </div>
-
-<form id="login-form" method="post">
+<form method="post" id="register-form">
     <div th:if="${info != null}" th:text="${info}" id="info"></div>
-    <input type="text" placeholder="login" class="text-input" name="login" th:field="*{userModel.login}">
-    <input type="password" placeholder="password" class="text-input" name="pass" th:field="*{userModel.pass}">
-    <input type="submit" value="Zaloguj" id="form-submit">
-    <a href="/register" id="register-link">Zarejestruj</a>
+    <input type="text" placeholder="Imię" class="text-input">
+    <input type="text" placeholder="Nazwisko"class="text-input">
+    <input type="text" placeholder="Login"class="text-input">
+    <input type="password" placeholder="Hasło"class="text-input">
+    <input type="password" placeholder="Powtórz hasło"class="text-input">
+    <input type="submit" value="Zarejestruj" id="form-submit">
+
 </form>
 </body>
 </html>

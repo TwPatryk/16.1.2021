@@ -24,19 +24,14 @@
     margin: 15px 200px;
 }
 
-.film {
-    border: 2px solid gray;
-    padding: 10px;
-    margin: 10px;
-}
-
-#login-form {
+#register-form {
+    display: block;
     width: 500px;
     margin: 20px auto;
     text-align: center;
 }
 
-#login-form input {
+#register-form input {
     display: block;
 }
 
@@ -68,8 +63,4 @@
     font-size: 26px;
     color: red;
     text-align: center;
-}
-
-#register-link {
-    font-size: 20px;
 }
