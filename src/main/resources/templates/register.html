@@ -21,11 +21,11 @@
 </div>
 <form method="post" id="register-form">
     <div th:if="${info != null}" th:text="${info}" id="info"></div>
-    <input type="text" placeholder="Imię" class="text-input">
-    <input type="text" placeholder="Nazwisko"class="text-input">
-    <input type="text" placeholder="Login"class="text-input">
-    <input type="password" placeholder="Hasło"class="text-input">
-    <input type="password" placeholder="Powtórz hasło"class="text-input">
+    <input type="text" placeholder="Imię" class="text-input" th:field="${registerModel.name}">
+    <input type="text" placeholder="Nazwisko"class="text-input"th:field="${registerModel.surname}">
+    <input type="text" placeholder="Login"class="text-input"th:field="${registerModel.login}">
+    <input type="password" placeholder="Hasło"class="text-input"th:field="${registerModel.pass}">
+    <input type="password" placeholder="Powtórz hasło"class="text-input"th:field="${registerModel.repeatedPass}">
     <input type="submit" value="Zarejestruj" id="form-submit">
 
 </form>

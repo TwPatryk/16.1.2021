@@ -11,6 +11,7 @@ import org.springframework.web.context.annotation.SessionScope;
 import pl.camp.it.filmoteka.dataBase.IUserRepository;
 import pl.camp.it.filmoteka.model.User;
 import pl.camp.it.filmoteka.model.view.ChangePassData;
+import pl.camp.it.filmoteka.model.view.UserRegistrationData;
 import pl.camp.it.filmoteka.session.SessionObject;
 
 import javax.annotation.Resource;
@@ -27,10 +28,7 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginForm(Model model) {
         model.addAttribute("userModel", new User());
-        String info = this.sessionObject.getInfo();
-        if(info != null) {
-            model.addAttribute("info", info);
-        }
+        model.addAttribute("info", this.sessionObject.getInfo());
         return "login";
     }
     @RequestMapping(value="/login", method = RequestMethod.POST)
@@ -55,10 +53,7 @@ public class UserController {
         if(this.sessionObject.isLogged()) {
             model.addAttribute("user", this.sessionObject.getUser());
             model.addAttribute("passModel", new ChangePassData());
-            String info = this.sessionObject.getInfo();
-            if(info != null) {
-                model.addAttribute("info", info);
-            }
+            model.addAttribute("info", this.sessionObject.getInfo());
             return "edit";
         }
         return "redirect:/login";
@@ -94,7 +89,32 @@ public class UserController {
         return "redirect:/edit";
     }
     @RequestMapping(value= "/register", method = RequestMethod.GET)
-    public String register() {
+    public String register(Model model) {
+        model.addAttribute("registerModel", new UserRegistrationData());
+        model.addAttribute("info", this.sessionObject.getInfo());
         return "register";
+    }
+    @RequestMapping(value = "/register", method= RequestMethod.POST)
+    public String processRegister(@ModelAttribute UserRegistrationData userRegistrationData) {
+        if(!userRegistrationData.getPass().equals(userRegistrationData.getRepeatedPass())) {
+            this.sessionObject.setInfo("Nieprawidłowo powtórzone hasła");
+            return "redirect:/register";
+        }
+        boolean checkResult = this.userRepository.checkIfLoginExist(userRegistrationData.getLogin());
+
+        if(checkResult) {
+            this.sessionObject.setInfo("Login zajęty");
+            return "redirect:/register";
+        }
+
+        User user = new User(userRegistrationData.getName(),
+                             userRegistrationData.getSurname(),
+                             userRegistrationData.getLogin(),
+                             userRegistrationData.getPass());
+
+        this.userRepository.addUser(user);
+
+        this.sessionObject.setInfo("Rejestracja udana!");
+        return "redirect:/login";
     }
 }

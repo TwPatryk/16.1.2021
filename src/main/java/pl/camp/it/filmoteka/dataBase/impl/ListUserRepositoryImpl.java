@@ -52,4 +52,19 @@ public class ListUserRepositoryImpl implements IUserRepository {
         }
         return null;
     }
+
+    @Override
+    public boolean checkIfLoginExist(String login) {
+        for(User userFromDB : this.userList) {
+            if(userFromDB.getLogin().equals(login)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void addUser(User user) {
+        this.userList.add(user);
+    }
 }
