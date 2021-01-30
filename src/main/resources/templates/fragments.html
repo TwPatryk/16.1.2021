@@ -5,12 +5,19 @@
     <title>Title</title>
 </head>
 <body>
+
 <div id="menu-choice" th:fragment="menu">
     <img src="/logo.png" alt="Logo" id="logo">
-    <a href="/movies">Movies</a>
-    <a href="/tv-shows">Tv-Shows</a>
-    <a href="/logout">Logout</a>
-    <a href="/edit" th:text="${user.login}"></a>
+    <div id="napisGlowny">
+        <p>FILMOTEKA</p>
+    </div>
+    <div id="menu-choice-list">
+        <a href="/movies">Movies</a>
+        <a href="/tv-shows">Tv-Shows</a>
+        <a href="/logout">Logout</a>
+        <a href="/edit">Moje konto</a>
+    </div>
+
 </div>
 </body>
 </html>

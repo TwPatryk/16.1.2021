@@ -9,16 +9,9 @@
     <link rel="stylesheet" href="register.css">
 </head>
 <body>
-<div id="napisGlowny">
-    <p>FILMOTEKA</p>
-</div>
 
-<div id="menu-choice">
-    <img src="/logo.png" alt="Logo" id="logo">
-    <a href="/movies">Movies</a>
-    <a href="/tv-shows">Tv-Shows</a>
-    <a href="/logout">Logout</a>
-</div>
+<div th:replace="fragments.html :: menu"></div>
+
 <form method="post" id="register-form">
     <div th:if="${info != null}" th:text="${info}" id="info"></div>
     <input type="text" placeholder="Imię" class="text-input" th:field="${registerModel.name}">
