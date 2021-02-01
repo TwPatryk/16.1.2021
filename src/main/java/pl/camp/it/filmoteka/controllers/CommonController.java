@@ -23,13 +23,28 @@ public class CommonController {
     @Resource
     SessionObject sessionObject;
 
+    @RequestMapping(value = "/", method= RequestMethod.GET)
+    public String commonRedirect() {
+        return "redirect:/main";
+    }
+
     @RequestMapping(value = "/main", method = RequestMethod.GET)
-        public String main (Model model){
+        public String main (Model model,@RequestParam(defaultValue = "none") String category){
         if(sessionObject.isLogged()) {
-            model.addAttribute("films", this.filmRepository.getAllFilms());
+            switch (category) {
+                case "movie":
+                    model.addAttribute("films", this.filmRepository.getMovies());
+                    break;
+                case "tvshow":
+                    model.addAttribute("films", this.filmRepository.getTvShows());
+                    break;
+                default:
+                    model.addAttribute("films", this.filmRepository.getAllFilms());
+                    break;
+            }
             model.addAttribute("user", this.sessionObject.getUser());
             return "main";
-        } else {
+        } else  {
             return "redirect:/login";
             }
         }
@@ -40,28 +55,7 @@ public class CommonController {
 
         return "database";
     }   */
-    @RequestMapping(value="/movies", method= RequestMethod.GET)
-    public String movies(Model model) {
-        if(sessionObject.isLogged()) {
-            model.addAttribute("films", this.filmRepository.getMovies());
-            model.addAttribute("user", this.sessionObject.getUser());
-            return "main";
-        } else {
-            return "redirect:/login";
-        }
 
-    }
-    @RequestMapping(value="/tv-shows", method= RequestMethod.GET)
-    public String tvShows(Model model) {
-        if(sessionObject.isLogged()) {
-            model.addAttribute("films", this.filmRepository.getTvShows());
-            model.addAttribute("user", this.sessionObject.getUser());
-            return "main";
-        } else {
-            return "redirect:/login";
-        }
-
-    }
     @RequestMapping(value= "/filter", method = RequestMethod.POST)
     public String filter(@RequestParam String filter,
                         Model model) {
