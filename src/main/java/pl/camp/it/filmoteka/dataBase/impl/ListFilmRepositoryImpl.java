@@ -58,18 +58,4 @@ public class ListFilmRepositoryImpl implements IFilmRepository {
         }
         return filmList;
     }
-
-    @Override
-    public List<Film> getFilmsByFilter(String filter) {
-        List<Film> filteredFilms = new ArrayList<>();
-
-        for(Film film : this.films) {
-            if (film.getTitle().toUpperCase().contains(filter.toUpperCase()) ||
-                    film.getDirector().toUpperCase().contains(filter.toUpperCase())) {
-                filteredFilms.add(film);
-            }
-        }
-        return filteredFilms;
-    }
-
 }

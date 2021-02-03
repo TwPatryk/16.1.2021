@@ -10,6 +10,7 @@ import pl.camp.it.filmoteka.dataBase.IFilmRepository;
 import pl.camp.it.filmoteka.model.Film;
 import pl.camp.it.filmoteka.model.Movie;
 import pl.camp.it.filmoteka.session.SessionObject;
+import pl.camp.it.filmoteka.utils.FilterUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -33,13 +34,19 @@ public class CommonController {
         if(sessionObject.isLogged()) {
             switch (category) {
                 case "movie":
-                    model.addAttribute("films", this.filmRepository.getMovies());
+                    model.addAttribute("films",
+                            FilterUtils.filterFilms(this.filmRepository.getMovies(),
+                            this.sessionObject.getFilter()));
                     break;
                 case "tvshow":
-                    model.addAttribute("films", this.filmRepository.getTvShows());
+                    model.addAttribute("films",
+                            FilterUtils.filterFilms(this.filmRepository.getTvShows(),
+                                    this.sessionObject.getFilter()));
                     break;
                 default:
-                    model.addAttribute("films", this.filmRepository.getAllFilms());
+                    model.addAttribute("films",
+                            FilterUtils.filterFilms(this.filmRepository.getAllFilms(),
+                                    this.sessionObject.getFilter()));
                     break;
             }
             model.addAttribute("user", this.sessionObject.getUser());
@@ -57,12 +64,10 @@ public class CommonController {
     }   */
 
     @RequestMapping(value= "/filter", method = RequestMethod.POST)
-    public String filter(@RequestParam String filter,
-                        Model model) {
+    public String filter(@RequestParam String filter) {
         if(sessionObject.isLogged()) {
-            model.addAttribute("films", this.filmRepository.getFilmsByFilter(filter));
-            model.addAttribute("user", this.sessionObject.getUser());
-            return"main";
+            this.sessionObject.setFilter(filter);
+            return"redirect:/main";
         } else {
             return "redirect:/login";
         }

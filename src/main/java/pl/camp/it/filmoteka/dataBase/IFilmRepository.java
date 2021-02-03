@@ -11,7 +11,6 @@ public interface IFilmRepository {
     List<Film> getAllFilms();
     List<Film> getMovies();
     List<Film> getTvShows();
-    List<Film> getFilmsByFilter(String filter);
 
 
 }
