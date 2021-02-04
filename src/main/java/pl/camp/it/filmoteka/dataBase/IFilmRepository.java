@@ -11,6 +11,8 @@ public interface IFilmRepository {
     List<Film> getAllFilms();
     List<Film> getMovies();
     List<Film> getTvShows();
+    Film getFilmByTitle(String title);
+    void addFilm(Film film);
 
 
 }

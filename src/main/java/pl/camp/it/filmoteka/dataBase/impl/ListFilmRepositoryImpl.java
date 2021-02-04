@@ -58,4 +58,19 @@ public class ListFilmRepositoryImpl implements IFilmRepository {
         }
         return filmList;
     }
+
+    @Override
+    public Film getFilmByTitle(String title) {
+        for(Film film : this.films) {
+            if(film.getTitle().equals(title)) {
+                return film;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void addFilm(Film film) {
+        this.films.add(film);
+    }
 }
