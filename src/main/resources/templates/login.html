@@ -9,7 +9,19 @@
 </head>
 <body>
 
-<div th:replace="fragments.html :: menu"></div>
+<div id="menu-choice" th:fragment="menu">
+    <img src="/logo.png" alt="Logo" id="logo">
+    <div id="napisGlowny">
+        <p>FILMOTEKA</p>
+    </div>
+
+<div id="menu-choice-list">
+    <a href="/main?category=movie">Movies</a>
+    <a href="/main?category=tvshow">Tv-Shows</a>
+    <a href="/logout">Logout</a>
+    <a href="/edit">Moje konto</a>
+</div>
+
 
 <form id="login-form" method="post">
     <div th:if="${info != null}" th:text="${info}" id="info"></div>

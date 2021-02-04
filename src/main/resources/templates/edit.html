@@ -12,6 +12,7 @@
 
 <div th:replace="fragments.html :: menu"></div>
 
+
     <form id="edit-data-form" method="post" action="/changeData">
         <input type="text" placeholder="Imie" class="text-input" th:field="*{user.name}">
         <input type="text" placeholder="Nazwisko" class="text-input" th:field="*{user.surname}">

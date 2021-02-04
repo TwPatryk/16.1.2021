@@ -16,7 +16,9 @@
         <a href="/main?category=movie">Movies</a>
         <a href="/main?category=tvshow">Tv-Shows</a>
         <a href="/logout">Logout</a>
+        <a href="/addFilm" th:if="${user.role.name() == 'ADMIN'}">Add Film</a>
         <a href="/edit">Moje konto</a>
+
     </div>
 
 </div>

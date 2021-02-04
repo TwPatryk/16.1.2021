@@ -12,6 +12,8 @@
 
 <div th:replace="fragments.html :: menu"></div>
 
+
+
 <form method="post" id="register-form">
     <div th:if="${info != null}" th:text="${info}" id="info"></div>
     <input type="text" placeholder="Imię" class="text-input" th:field="${registerModel.name}">

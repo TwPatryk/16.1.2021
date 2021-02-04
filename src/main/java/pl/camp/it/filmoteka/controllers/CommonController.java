@@ -50,6 +50,7 @@ public class CommonController {
                     break;
             }
             model.addAttribute("user", this.sessionObject.getUser());
+            model.addAttribute("filter", this.sessionObject.getFilter());
             return "main";
         } else  {
             return "redirect:/login";

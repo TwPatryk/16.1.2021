@@ -110,7 +110,8 @@ public class UserController {
         User user = new User(userRegistrationData.getName(),
                              userRegistrationData.getSurname(),
                              userRegistrationData.getLogin(),
-                             userRegistrationData.getPass());
+                             userRegistrationData.getPass(),
+                             User.Role.USER);
 
         this.userRepository.addUser(user);
 
