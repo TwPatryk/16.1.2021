@@ -24,6 +24,9 @@ public class AdminController {
 
     @RequestMapping(value = "/addFilm", method = RequestMethod.GET)
     public String addFilmForm(Model model) {
+        if(!this.sessionObject.isLogged()) {
+            return "redirect:/login";
+        }
         model.addAttribute("user", this.sessionObject.getUser());
         model.addAttribute("info", this.sessionObject.getInfo());
         model.addAttribute("film", new Film());
@@ -32,15 +35,21 @@ public class AdminController {
 
     @RequestMapping(value = "/addFilm", method = RequestMethod.POST)
     public String addFilm(@ModelAttribute Film film) {
+        if(!this.sessionObject.isLogged()) {
+            return "redirect:/login";
+        }
         Film filmFromDB = this.filmRepository.getFilmByTitle(film.getTitle());
 
         if(filmFromDB != null) {
             this.sessionObject.setInfo("Film znajduje się już w bazie!");
         } else {
-            this.filmRepository.addFilm(film);
-            this.sessionObject.setInfo("Dodano Film!");
-
-
+            if(film.getTitle().equals("") || film.getDirector().equals("") || film.getLength().equals("") ||
+                    film.getLength().equals("")) {
+                this.sessionObject.setInfo("Uzupełnij formularz");
+            } else {
+                this.filmRepository.addFilm(film);
+                this.sessionObject.setInfo("Dodano Film!");
+            }
         }
         return "redirect:/addFilm";
     }
