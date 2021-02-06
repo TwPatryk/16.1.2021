@@ -15,6 +15,8 @@ import pl.camp.it.filmoteka.model.view.UserRegistrationData;
 import pl.camp.it.filmoteka.session.SessionObject;
 
 import javax.annotation.Resource;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 public class UserController {
@@ -33,6 +35,15 @@ public class UserController {
     }
     @RequestMapping(value="/login", method = RequestMethod.POST)
     public String authentication(@ModelAttribute User user) {
+
+        Pattern regexPattern = Pattern.compile(".{3}.*");
+        Matcher loginMatcher = regexPattern.matcher(user.getLogin());
+        Matcher passMatcher = regexPattern.matcher(user.getPass());
+
+        if(!loginMatcher.matches() || !passMatcher.matches()) {
+            this.sessionObject.setInfo("Nieprawidłowe dane! (regexp)");
+            return"redirect:/login";
+        }
 
         this.sessionObject.setUser(this.userRepository.authenticate(user));
 
