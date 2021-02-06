@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="common-controls.css">
+    <script src="loginValidator.js"><</script>
 </head>
 <body>
 
@@ -23,9 +24,9 @@
 </div>
 
 
-<form id="login-form" method="post">
+<form name="loginForm" id="login-form" method="post" onsubmit="return validate()">
     <div th:if="${info != null}" th:text="${info}" id="info"></div>
-    <input type="text" placeholder="login" class="text-input" name="login" th:field="*{userModel.login}">
+    <input type="text" placeholder="login" class="text-input" name="login" th:field="*{userModel.login}" >
     <input type="password" placeholder="password" class="text-input" name="pass" th:field="*{userModel.pass}">
     <input type="submit" value="Zaloguj" id="form-submit">
     <a href="/register" id="register-link">Zarejestruj</a>
