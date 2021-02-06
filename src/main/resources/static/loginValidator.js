@@ -1,12 +1,18 @@
 function validate() {
     var login = document.forms["loginForm"]["login"].value;
-    var login = document.forms["loginForm"]["pass"].value;
+    var pass = document.forms["loginForm"]["pass"].value;
+
+    var flag = true;
 
     if(login == "") {
-        return false;
+        document.forms["loginForm"]["login"].style.background = "#eec4c4";
+        flag = false;
     }
 
     if(pass == "") {
-        return false;
+        document.forms["loginForm"]["pass"].style.background = "#eec4c4";
+        flag = false;
     }
+
+    return flag;
 }
