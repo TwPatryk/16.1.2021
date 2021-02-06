@@ -1,0 +1,29 @@
+#logo {
+     height: 200px;
+     width: 200px;
+     float: left;
+
+ }
+#napisGlowny {
+     margin-left: 150px;
+     display: inline-block;
+     font-size: 80px;
+     text-align: center;
+
+ }
+ #menu-choice {
+     text-align: center;
+
+ }
+
+#menu-choice a:hover {
+     color: red;
+}
+
+#menu-choice-list {
+        font-size: 30px;
+        margin: 40px;
+        text-decoration: none;
+        color: black;
+        transition: color 0,5s;
+}
