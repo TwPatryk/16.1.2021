@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Filmoteka</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="common-controls.css">
+</head>
+<body>
+
+<div th:replace="fragments.html :: menu"></div>
+
+<div id="filter-form">
+    <form method="post" action="/filter">
+        <input type="text" placeholder="filtruj" name="filter" th:value="${filter}">
+        <input type="submit" value="Filtruj">
+    </form>
+</div>
+
+<div id="content">
+    <th:block th:each="film : ${films}">
+        <div class="film">
+            <span th:text="${film.title}" class="film-title"></span>
+            <span th:text="'Director: ' + ${film.director}" class="film-director"></span>
+            <div class="film-info">
+                <span th:text="'Production year: ' + ${film.productionYear}"></span>
+                <span th:text="'length: ' + ${film.length}"></span>
+            </div>
+        </div>
+    </th:block>
+</div>
+
+<select th:field="${rateAndComm.rate}" class="text-input" method="post">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+</select>
+
+<input type="submit" value="Dodaj" id="form-submit">
+</form>
+
+
+</body>
+</html>
+

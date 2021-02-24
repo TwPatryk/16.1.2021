@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.sun.jmx.snmp.ThreadContext.contains;
+import static com.sun.jmx.snmp.ThreadContext.get;
 
 
 @Component
@@ -40,8 +41,8 @@ public class ListFilmRepositoryImpl implements IFilmRepository {
     @Override
     public List<Film> getMovies() {
         List<Film> filmList = new ArrayList<>();
-        for(Film film : this.films) {
-            if(film.getCategory() == Film.Category.MOVIE) {
+        for (Film film : this.films) {
+            if (film.getCategory() == Film.Category.MOVIE) {
                 filmList.add(film);
             }
         }
@@ -51,8 +52,8 @@ public class ListFilmRepositoryImpl implements IFilmRepository {
     @Override
     public List<Film> getTvShows() {
         List<Film> filmList = new ArrayList<>();
-        for(Film film : this.films) {
-            if(film.getCategory() == Film.Category.TVSHOW) {
+        for (Film film : this.films) {
+            if (film.getCategory() == Film.Category.TVSHOW) {
                 filmList.add(film);
             }
         }
@@ -61,8 +62,8 @@ public class ListFilmRepositoryImpl implements IFilmRepository {
 
     @Override
     public Film getFilmByTitle(String title) {
-        for(Film film : this.films) {
-            if(film.getTitle().equals(title)) {
+        for (Film film : this.films) {
+            if (film.getTitle().equals(title)) {
                 return film;
             }
         }

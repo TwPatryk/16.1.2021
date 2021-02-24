@@ -13,6 +13,7 @@
 
 
 
+
 <div id="filter-form">
     <form method="post" action="/filter">
         <input type="text" placeholder="filtruj" name="filter" th:value="${filter}">
@@ -29,6 +30,8 @@
                 <div class="film-info">
                     <span th:text="'Production year: ' + ${film.productionYear}"></span>
                     <span th:text="'length: ' + ${film.length}"></span>
+                    <a th:href="@{/rate/{title}(title=${film.title})}">Rate</a>
+                    <a th:href="@{/comment/{title}(title=${film.title})}">Comment</a>
                 </div>
             </div>
         </th:block>

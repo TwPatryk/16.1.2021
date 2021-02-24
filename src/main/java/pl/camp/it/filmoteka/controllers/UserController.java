@@ -77,6 +77,7 @@ public class UserController {
         Matcher surnameMatcher = regexPattern.matcher(user.getSurname());
 
         if(!nameMatcher.matches() || !surnameMatcher.matches()) {
+            this.sessionObject.setInfo("Nieprawidłowe dane !!");
             return "redirect:/edit";
         }
 
@@ -97,6 +98,10 @@ public class UserController {
             this.sessionObject.setInfo("Nieprawidłowo powtórzone hasło!");
             return "redirect:/edit";
         }
+        if(!currentPassMatcher.matches() || !newPassMatcher.matches()) {
+            this.sessionObject.setInfo("Nieprawidłowe hasło !!");
+            return "redirect:/edit";
+        }
         User user = new User();
         user.setPass(changePassData.getPass());
         user.setLogin(this.sessionObject.getUser().getLogin());
@@ -113,6 +118,12 @@ public class UserController {
 
         return "redirect:/edit";
     }
+
+
+
+
+
+
     @RequestMapping(value= "/register", method = RequestMethod.GET)
     public String register(Model model) {
         model.addAttribute("registerModel", new UserRegistrationData());
@@ -132,7 +143,7 @@ public class UserController {
             return "redirect:/register";
         }
 
-        User user = new User(userRegistrationData.getName(),
+        User user = new User(0,userRegistrationData.getName(),
                              userRegistrationData.getSurname(),
                              userRegistrationData.getLogin(),
                              userRegistrationData.getPass(),

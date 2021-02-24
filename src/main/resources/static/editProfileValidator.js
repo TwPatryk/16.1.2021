@@ -23,14 +23,14 @@ function validateData() {
 
 function validatePass() {
     var currentPass = document.forms["passForm"]["currentPass"].value;
-    var currentPass = document.forms["passForm"]["newPass"].value;
-    var currentPass = document.forms["passForm"]["newPass2"].value;
+    var newPass = document.forms["passForm"]["newPass"].value;
+    var newPass2 = document.forms["passForm"]["newPass2"].value;
 
     var regex = new RegExp(/.{3}.*/);
     var flag = true;
 
     if(!regex.test(currentPass)) {
-        var currentPass = document.forms["passForm"]["currentPass"].style.background = "eec4c4";
+        document.forms["passForm"]["currentPass"].style.background = "eec4c4";
         flag = false;
     } else {
         document.forms["passForm"]["currentPass"].style.background = "white";
