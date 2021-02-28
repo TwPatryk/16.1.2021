@@ -30,8 +30,10 @@
                 <div class="film-info">
                     <span th:text="'Production year: ' + ${film.productionYear}"></span>
                     <span th:text="'length: ' + ${film.length}"></span>
-                    <a th:href="@{/rate/{title}(title=${film.title})}">Rate</a>
-                    <a th:href="@{/comment/{title}(title=${film.title})}">Comment</a>
+                    <div class="edit">
+                        <a th:href="@{/editFilm/{title}(title=${film.title})}"></a>
+                        <img src="edit.png" alt="editing" width="30" height="30">
+                    </div>
                 </div>
             </div>
         </th:block>

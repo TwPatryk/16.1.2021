@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.camp.it.filmoteka.dataBase.IFilmRepository;
@@ -52,5 +53,19 @@ public class AdminController {
             }
         }
         return "redirect:/addFilm";
+    }
+    @RequestMapping(value = "editFilm/{title}", method = RequestMethod.GET)
+    public String editFilmPage (@PathVariable String title, Model model) {
+        Film film = this.filmRepository.getFilmByTitle(title);
+        model.addAttribute("film", film);
+        model.addAttribute("user", this.sessionObject.getUser());
+        return "editFilm";
+    }
+    @RequestMapping(value = "/editFilm/{title}", method = RequestMethod.POST)
+    public String editFilm (@ModelAttribute Film film, @PathVariable String title) {
+        film.setTitle(title);
+        this.filmRepository.updateFilm(film);
+
+        return "redirect:/main";
     }
 }

@@ -4,8 +4,8 @@ public class TvShow extends Film {
     public TvShow() {
     }
 
-    public TvShow(String title, String director, int productionYear, String length, Category category) {
-        super(title, director, productionYear, length, category);
+    public TvShow(int id, String title, String director, int productionYear, String length, Category category) {
+        super(id, title, director, productionYear, length, category);
     }
 
 }

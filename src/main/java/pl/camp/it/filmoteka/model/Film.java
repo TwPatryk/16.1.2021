@@ -1,6 +1,7 @@
 package pl.camp.it.filmoteka.model;
 
 public class Film {
+    private int id;
     private String title;
     private String director;
     private int productionYear;
@@ -10,7 +11,8 @@ public class Film {
     public Film() {
     }
 
-    public Film(String title, String director, int productionYear, String length, Category category) {
+    public Film(int id, String title, String director, int productionYear, String length, Category category) {
+        this.id = id;
         this.title = title;
         this.director = director;
         this.productionYear = productionYear;
@@ -18,7 +20,13 @@ public class Film {
         this.category = category;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;

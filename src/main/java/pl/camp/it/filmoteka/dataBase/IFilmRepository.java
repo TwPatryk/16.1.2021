@@ -13,6 +13,7 @@ public interface IFilmRepository {
     List<Film> getTvShows();
     Film getFilmByTitle(String title);
     void addFilm(Film film);
+    void updateFilm(Film film);
 
 
 }

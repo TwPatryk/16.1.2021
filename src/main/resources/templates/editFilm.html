@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Filmoteka</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="common-controls.css">
+</head>
+<body>
+<div th:replace="fragments.html :: menu"></div>
+
+<form method="post" id="register-form">
+    <div th:if="${info != null}" th:text="${info}" id="info"></div>
+    <input type="text" placeholder="Title" class="text-input" th:field="${film.title}">
+    <input type="text" placeholder="Director"class="text-input"th:field="${film.director}">
+    <input type="text" placeholder="productionYear"class="text-input"th:field="${film.productionYear}">
+    <input type="text" placeholder="length"class="text-input"th:field="${film.length}">
+    <select th:field="${film.category}" class="text-input">
+        <option value="MOVIE">Movie</option>
+        <option value="TVSHOW">Tv-Show</option>
+    </select>
+    <input type="submit" value="Dodaj" id="form-submit">
+
+</form>
+</body>
+</html>

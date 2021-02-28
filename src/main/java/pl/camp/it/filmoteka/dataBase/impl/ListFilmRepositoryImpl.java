@@ -14,14 +14,14 @@ import static com.sun.jmx.snmp.ThreadContext.contains;
 import static com.sun.jmx.snmp.ThreadContext.get;
 
 
-@Component
+
 public class ListFilmRepositoryImpl implements IFilmRepository {
 
 
     private final List<Film> films = new ArrayList<>();
 
     public ListFilmRepositoryImpl() {
-
+/*
         films.add(new Movie("The Thing", "John Carpenter", 1982, "110min", Film.Category.MOVIE));
         films.add(new Movie("American Psycho", "Mary Harron", 2000, "100min", Film.Category.MOVIE));
         films.add(new Movie("Good, Bad and Ugly", "Sergio Leone", 1966, "100min", Film.Category.MOVIE));
@@ -31,6 +31,8 @@ public class ListFilmRepositoryImpl implements IFilmRepository {
         films.add(new TvShow("House M.D", "David Shore", 2004, "8 seasons", Film.Category.TVSHOW));
         films.add(new TvShow("Friends", "David Crane, Marta Kauffman", 1994, "10 seasons", Film.Category.TVSHOW));
         films.add(new TvShow("Queen's Gambit", "Allan Scott, Scott Frank", 2020, "1 season", Film.Category.TVSHOW));
+
+ */
     }
 
     @Override
@@ -73,5 +75,10 @@ public class ListFilmRepositoryImpl implements IFilmRepository {
     @Override
     public void addFilm(Film film) {
         this.films.add(film);
+    }
+
+    @Override
+    public void updateFilm(Film film) {
+        //TODO do zrobienia
     }
 }
