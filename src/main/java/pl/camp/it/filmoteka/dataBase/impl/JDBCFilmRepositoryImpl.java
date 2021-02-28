@@ -145,14 +145,13 @@ public class JDBCFilmRepositoryImpl implements IFilmRepository {
     @Override
     public void updateFilm(Film film) {
         try {
-            String SQL = "UPDATE tfilm SET title=?, director=?, productionYear=?, length=?, category=? WHERE title=?";
+            String SQL = "UPDATE tfilm SET director=?, productionYear=?, length=?, category=? WHERE title=?";
             PreparedStatement preparedStatement = this.connection.prepareStatement(SQL);
-            preparedStatement.setString(1, film.getTitle());
-            preparedStatement.setString(2, film.getDirector());
-            preparedStatement.setInt(3, film.getProductionYear());
-            preparedStatement.setString(4, film.getLength());
-            preparedStatement.setString(5, film.getCategory().toString());
-
+            preparedStatement.setString(1, film.getDirector());
+            preparedStatement.setInt(2, film.getProductionYear());
+            preparedStatement.setString(3, film.getLength());
+            preparedStatement.setString(4, film.getCategory().toString());
+            preparedStatement.setString(5, film.getTitle());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

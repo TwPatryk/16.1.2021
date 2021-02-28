@@ -12,7 +12,7 @@
 
 <form method="post" id="register-form">
     <div th:if="${info != null}" th:text="${info}" id="info"></div>
-    <input type="text" placeholder="Title" class="text-input" th:field="${film.title}">
+    <input type="text" placeholder="Title" class="text-input" th:field="${film.title}"disabled>
     <input type="text" placeholder="Director"class="text-input"th:field="${film.director}">
     <input type="text" placeholder="productionYear"class="text-input"th:field="${film.productionYear}">
     <input type="text" placeholder="length"class="text-input"th:field="${film.length}">
@@ -20,7 +20,7 @@
         <option value="MOVIE">Movie</option>
         <option value="TVSHOW">Tv-Show</option>
     </select>
-    <input type="submit" value="Dodaj" id="form-submit">
+    <input type="submit" value="Edytuj" id="form-submit">
 
 </form>
 </body>

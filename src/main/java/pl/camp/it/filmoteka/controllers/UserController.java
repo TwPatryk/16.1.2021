@@ -3,12 +3,11 @@ package pl.camp.it.filmoteka.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.SessionScope;
+import pl.camp.it.filmoteka.dataBase.IFilmRepository;
 import pl.camp.it.filmoteka.dataBase.IUserRepository;
+import pl.camp.it.filmoteka.model.Film;
 import pl.camp.it.filmoteka.model.User;
 import pl.camp.it.filmoteka.model.view.ChangePassData;
 import pl.camp.it.filmoteka.model.view.UserRegistrationData;
@@ -23,6 +22,9 @@ public class UserController {
 
     @Autowired
     IUserRepository userRepository;
+
+    @Autowired
+    IFilmRepository filmRepository;
 
     @Resource
     SessionObject sessionObject;
@@ -118,10 +120,6 @@ public class UserController {
 
         return "redirect:/edit";
     }
-
-
-
-
 
 
     @RequestMapping(value= "/register", method = RequestMethod.GET)

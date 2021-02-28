@@ -44,6 +44,21 @@
 
 #filter-form input[type=submit] {
     font-size: 24px;
+}
 
+.edit {
+    background-image: url("edit.png");
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    float: right;
+    padding: 30px;
+}
+
+.film-info {
+    margin: 25px;
+}
 
 
