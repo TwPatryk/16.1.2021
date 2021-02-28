@@ -36,12 +36,12 @@ public class CommonController {
             switch (category) {
                 case "movie":
                     model.addAttribute("films",
-                            FilterUtils.filterFilms(this.filmRepository.getMovies(),
+                            FilterUtils.filterFilms(this.filmRepository.getFilmsByCategory(Film.Category.MOVIE),
                                     this.sessionObject.getFilter()));
                     break;
                 case "tvshow":
                     model.addAttribute("films",
-                            FilterUtils.filterFilms(this.filmRepository.getTvShows(),
+                            FilterUtils.filterFilms(this.filmRepository.getFilmsByCategory(Film.Category.TVSHOW),
                                     this.sessionObject.getFilter()));
                     break;
                 default:

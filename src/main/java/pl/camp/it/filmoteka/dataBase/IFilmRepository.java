@@ -9,8 +9,7 @@ import java.util.List;
 public interface IFilmRepository {
 
     List<Film> getAllFilms();
-    List<Film> getMovies();
-    List<Film> getTvShows();
+    List<Film> getFilmsByCategory(Film.Category category);
     Film getFilmByTitle(String title);
     void addFilm(Film film);
     void updateFilm(Film film);

@@ -29,15 +29,7 @@ public class JDBCFilmRepositoryImpl implements IFilmRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                Film film = new Film();
-                film.setId(resultSet.getInt("id"));
-                film.setTitle(resultSet.getString("title"));
-                film.setDirector(resultSet.getString("director"));
-                film.setProductionYear(resultSet.getInt("productionYear"));
-                film.setLength(resultSet.getString("length"));
-                film.setCategory(Film.Category.valueOf(resultSet.getString("category")));
-
-                films.add(film);
+                films.add(this.mapResultSetToFilm(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -46,50 +38,16 @@ public class JDBCFilmRepositoryImpl implements IFilmRepository {
     }
 
     @Override
-    public List<Film> getMovies() {
+    public List<Film> getFilmsByCategory(Film.Category category) {
         List<Film> films = new ArrayList<>();
         try {
             String SQL = "SELECT * FROM tfilm WHERE category=?";
             PreparedStatement preparedStatement = this.connection.prepareStatement(SQL);
-            preparedStatement.setString(1, Film.Category.MOVIE.toString());
+            preparedStatement.setString(1, category.toString());
+
             ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                Film film = new Film();
-                film.setId(resultSet.getInt("id"));
-                film.setTitle(resultSet.getString("title"));
-                film.setDirector(resultSet.getString("director"));
-                film.setProductionYear(resultSet.getInt("productionYear"));
-                film.setLength(resultSet.getString("length"));
-                film.setCategory(Film.Category.valueOf(resultSet.getString("category")));
-
-                films.add(film);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return films;
-    }
-
-    @Override
-    public List<Film> getTvShows() {
-        List<Film> films = new ArrayList<>();
-        try {
-            String SQL = "SELECT * FROM tfilm WHERE category=?";
-            PreparedStatement preparedStatement = this.connection.prepareStatement(SQL);
-            preparedStatement.setString(1, Film.Category.TVSHOW.toString());
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                Film film = new Film();
-                film.setId(resultSet.getInt("id"));
-                film.setTitle(resultSet.getString("title"));
-                film.setDirector(resultSet.getString("director"));
-                film.setProductionYear(resultSet.getInt("productionYear"));
-                film.setLength(resultSet.getString("length"));
-                film.setCategory(Film.Category.valueOf(resultSet.getString("category")));
-
-                films.add(film);
+            while(resultSet.next()) {
+                films.add(this.mapResultSetToFilm(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -107,15 +65,7 @@ public class JDBCFilmRepositoryImpl implements IFilmRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if(resultSet.next()) {
-                Film film = new Film();
-                film.setId(resultSet.getInt("id"));
-                film.setTitle(resultSet.getString("title"));
-                film.setDirector(resultSet.getString("director"));
-                film.setProductionYear(resultSet.getInt("productionYear"));
-                film.setLength(resultSet.getString("length"));
-                film.setCategory(Film.Category.valueOf(resultSet.getString("category")));
-
-                return film;
+                return this.mapResultSetToFilm(resultSet);
             } else {
                 return null;
             }
@@ -156,5 +106,17 @@ public class JDBCFilmRepositoryImpl implements IFilmRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    private Film mapResultSetToFilm(ResultSet resultSet) throws SQLException {
+
+        Film film = new Film();
+        film.setId(resultSet.getInt("id"));
+        film.setTitle(resultSet.getString("title"));
+        film.setDirector(resultSet.getString("director"));
+        film.setProductionYear(resultSet.getInt("productionYear"));
+        film.setLength(resultSet.getString("length"));
+        film.setCategory(Film.Category.valueOf(resultSet.getString("category")));
+
+        return film;
     }
 }

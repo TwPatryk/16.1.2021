@@ -41,25 +41,9 @@ public class ListFilmRepositoryImpl implements IFilmRepository {
     }
 
     @Override
-    public List<Film> getMovies() {
-        List<Film> filmList = new ArrayList<>();
-        for (Film film : this.films) {
-            if (film.getCategory() == Film.Category.MOVIE) {
-                filmList.add(film);
-            }
-        }
-        return filmList;
-    }
-
-    @Override
-    public List<Film> getTvShows() {
-        List<Film> filmList = new ArrayList<>();
-        for (Film film : this.films) {
-            if (film.getCategory() == Film.Category.TVSHOW) {
-                filmList.add(film);
-            }
-        }
-        return filmList;
+    public List<Film> getFilmsByCategory(Film.Category category) {
+        // TODO do zrobienia
+        return null;
     }
 
     @Override
