@@ -31,7 +31,7 @@
                     <span th:text="'Production year: ' + ${film.productionYear}"></span>
                     <span th:text="'length: ' + ${film.length}"></span>
                     <div>
-                        <a th:href="@{/editFilm/{title}(title=${film.title})}" class="edit"></a>
+                        <a th:if="${user.role.name() =='ADMIN'}" th:href="@{editFilm/{id}(id=${film.id})}"class="edit"></a>
                     </div>
                 </div>
             </div>
