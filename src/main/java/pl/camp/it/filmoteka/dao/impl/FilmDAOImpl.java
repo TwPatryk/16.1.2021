@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Repository
@@ -87,6 +89,41 @@ public class FilmDAOImpl implements IFilmDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public List<Film> getFilmsByCategory(Film.Category category) {
+        List<Film> films = new ArrayList<>();
+        try {
+            String SQL = "SELECT * FROM tfilm WHERE category=?";
+            PreparedStatement preparedStatement = this.connection.prepareStatement(SQL);
+            preparedStatement.setString(1, category.toString());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                films.add(this.mapResultSetToFilm(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return films;
+    }
+
+    @Override
+    public List<Film> getAllFilms() {
+        List<Film> films = new ArrayList<>();
+        try {
+            String SQL = "SELECT * FROM tfilm";
+            PreparedStatement preparedStatement = this.connection.prepareStatement(SQL);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                films.add(this.mapResultSetToFilm(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return films;
     }
 
     private Film mapResultSetToFilm(ResultSet resultSet) throws SQLException {

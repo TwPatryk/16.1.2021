@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.camp.it.filmoteka.dataBase.IFilmRepository;
 import pl.camp.it.filmoteka.model.Film;
 import pl.camp.it.filmoteka.model.Movie;
+import pl.camp.it.filmoteka.services.IFilmService;
 import pl.camp.it.filmoteka.session.SessionObject;
 import pl.camp.it.filmoteka.utils.FilterUtils;
 
@@ -20,7 +21,7 @@ import java.util.List;
 public class CommonController {
 
     @Autowired
-    IFilmRepository filmRepository;
+    IFilmService filmService;
 
     @Resource
     SessionObject sessionObject;
@@ -33,23 +34,7 @@ public class CommonController {
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String main(Model model, @RequestParam(defaultValue = "none") String category) {
         if (sessionObject.isLogged()) {
-            switch (category) {
-                case "movie":
-                    model.addAttribute("films",
-                            FilterUtils.filterFilms(this.filmRepository.getFilmsByCategory(Film.Category.MOVIE),
-                                    this.sessionObject.getFilter()));
-                    break;
-                case "tvshow":
-                    model.addAttribute("films",
-                            FilterUtils.filterFilms(this.filmRepository.getFilmsByCategory(Film.Category.TVSHOW),
-                                    this.sessionObject.getFilter()));
-                    break;
-                default:
-                    model.addAttribute("films",
-                            FilterUtils.filterFilms(this.filmRepository.getAllFilms(),
-                                    this.sessionObject.getFilter()));
-                    break;
-            }
+            model.addAttribute("films", this.filmService.getFilmsByCategoryWithFilter(category));
             model.addAttribute("user", this.sessionObject.getUser());
             model.addAttribute("filter", this.sessionObject.getFilter());
             return "main";

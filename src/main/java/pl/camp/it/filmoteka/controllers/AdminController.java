@@ -18,9 +18,6 @@ import javax.annotation.Resource;
 @Controller
 public class AdminController {
 
-    @Autowired
-    IFilmRepository filmRepository;
-
     @Resource
     SessionObject sessionObject;
 
