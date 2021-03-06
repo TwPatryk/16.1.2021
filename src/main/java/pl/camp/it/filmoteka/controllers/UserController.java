@@ -102,24 +102,24 @@ public class UserController {
             this.sessionObject.setInfo("Nieprawidłowo powtórzone hasło!");
             return "redirect:/edit";
         }
+
+        if(!currentPassMatcher.matches() || !newPassMatcher.matches()) {
+            this.sessionObject.setInfo("Nieprawidłowe hasło!");
+            return "redirect:/edit";
+        }
+
+
         if(!currentPassMatcher.matches() || !newPassMatcher.matches()) {
             this.sessionObject.setInfo("Nieprawidłowe hasło !!");
             return "redirect:/edit";
         }
-        User user = new User();
-        user.setPass(changePassData.getPass());
-        user.setLogin(this.sessionObject.getUser().getLogin());
 
-        User authenticatedUser = this.userRepository.authenticate(user);
-
-        if(authenticatedUser == null || !currentPassMatcher.matches() || !newPassMatcher.matches()) {
-            this.sessionObject.setInfo("Nieprawidłowe hasło !");
-            return"redirect:/edit";
+        User result = this.userService.updateUserPass(changePassData);
+        if(result != null) {
+            this.sessionObject.setUser(result);
+        } else {
+            this.sessionObject.setInfo("Zmiana hasła nieudana!!");
         }
-        user.setPass(changePassData.getNewPass());
-        User updatedUser = this.userRepository.updateUserPass(user);
-        this.sessionObject.setUser(updatedUser);
-
         return "redirect:/edit";
     }
 
