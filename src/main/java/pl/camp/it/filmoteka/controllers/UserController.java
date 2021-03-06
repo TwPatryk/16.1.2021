@@ -11,6 +11,7 @@ import pl.camp.it.filmoteka.model.Film;
 import pl.camp.it.filmoteka.model.User;
 import pl.camp.it.filmoteka.model.view.ChangePassData;
 import pl.camp.it.filmoteka.model.view.UserRegistrationData;
+import pl.camp.it.filmoteka.services.IUserService;
 import pl.camp.it.filmoteka.session.SessionObject;
 
 import javax.annotation.Resource;
@@ -28,6 +29,9 @@ public class UserController {
 
     @Resource
     SessionObject sessionObject;
+
+    @Autowired
+    IUserService userService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginForm(Model model) {
@@ -47,7 +51,7 @@ public class UserController {
             return"redirect:/login";
         }
 
-        this.sessionObject.setUser(this.userRepository.authenticate(user));
+        this.sessionObject.setUser(this.userService.authenticate(user));
 
         if(this.sessionObject.getUser() != null) {
             return"redirect:/main";
