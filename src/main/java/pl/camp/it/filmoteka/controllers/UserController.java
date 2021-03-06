@@ -87,13 +87,11 @@ public class UserController {
             return "redirect:/edit";
         }
 
-        user.setLogin(this.sessionObject.getUser().getLogin());
-        User updatedUser = this.userRepository.updateUserData(user);
-        this.sessionObject.setUser(updatedUser);
+        this.userService.updateUserData(user);
         return "redirect:/edit";
     }
     @RequestMapping(value="/changePass", method= RequestMethod.POST)
-    public String changePass(@ModelAttribute ChangePassData changePassData, Model model) {
+    public String changePass(@ModelAttribute ChangePassData changePassData) {
 
 
         Pattern regexPattern = Pattern.compile(".{3}.*");

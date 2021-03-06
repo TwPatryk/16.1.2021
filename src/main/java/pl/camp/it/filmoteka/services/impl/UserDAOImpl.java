@@ -33,6 +33,24 @@ public class UserDAOImpl implements IUserDAO {
         return null;
     }
 
+    @Override
+    public void updateUser(User user) {
+        try {
+            String SQL = "UPDATE tuser SET name=?, surname=?, login=?, pass=?, role=? WHERE id=?";
+            PreparedStatement preparedStatement = this.connection.prepareStatement(SQL);
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getSurname());
+            preparedStatement.setString(3, user.getLogin());
+            preparedStatement.setString(4, user.getPass());
+            preparedStatement.setString(5, user.getRole().toString());
+            preparedStatement.setInt(6, user.getId());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private User mapResultSetToUser (ResultSet resultSet) throws SQLException {
         User user = new User();
         user.setId(resultSet.getInt("id"));
