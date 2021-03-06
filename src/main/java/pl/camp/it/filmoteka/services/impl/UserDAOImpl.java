@@ -51,6 +51,23 @@ public class UserDAOImpl implements IUserDAO {
         }
     }
 
+    @Override
+    public void persistUser(User user) {
+        try {
+            String SQL = "INSERT INTO tuser (name, surname, login, pass, role) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = this.connection.prepareStatement(SQL);
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getSurname());
+            preparedStatement.setString(3, user.getLogin());
+            preparedStatement.setString(4, user.getPass());
+            preparedStatement.setString(5, user.getRole().toString());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private User mapResultSetToUser (ResultSet resultSet) throws SQLException {
         User user = new User();
         user.setId(resultSet.getInt("id"));

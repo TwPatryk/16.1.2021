@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.camp.it.filmoteka.model.User;
 import pl.camp.it.filmoteka.model.view.ChangePassData;
+import pl.camp.it.filmoteka.model.view.UserRegistrationData;
 import pl.camp.it.filmoteka.services.IUserService;
 import pl.camp.it.filmoteka.session.SessionObject;
 
@@ -50,5 +51,22 @@ public class UserServiceImpl implements IUserService {
         this.userDAO.updateUser(authenticatedUser);
 
         return authenticatedUser;
+    }
+
+    @Override
+    public boolean registerUser(UserRegistrationData userRegistrationData) {
+        User userFromDatabase = this.userDAO.getUserByLogin(userRegistrationData.getLogin());
+        if(userFromDatabase != null) {
+            return false;
+        }
+        User user = new User();
+        user.setName(userRegistrationData.getName());
+        user.setSurname(userRegistrationData.getSurname());
+        user.setLogin(userRegistrationData.getLogin());
+        user.setPass(userRegistrationData.getPass());
+        user.setRole(User.Role.USER);
+
+        this.userDAO.persistUser(user);
+        return true;
     }
 }

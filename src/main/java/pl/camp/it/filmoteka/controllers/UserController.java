@@ -136,20 +136,13 @@ public class UserController {
             this.sessionObject.setInfo("Nieprawidłowo powtórzone hasła");
             return "redirect:/register";
         }
-        boolean checkResult = this.userRepository.checkIfLoginExist(userRegistrationData.getLogin());
 
-        if(checkResult) {
+        boolean checkResult = this.userService.registerUser(userRegistrationData);
+
+        if(!checkResult) {
             this.sessionObject.setInfo("Login zajęty");
             return "redirect:/register";
         }
-
-        User user = new User(0,userRegistrationData.getName(),
-                             userRegistrationData.getSurname(),
-                             userRegistrationData.getLogin(),
-                             userRegistrationData.getPass(),
-                             User.Role.USER);
-
-        this.userRepository.addUser(user);
 
         this.sessionObject.setInfo("Rejestracja udana!");
         return "redirect:/login";
